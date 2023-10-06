@@ -1,5 +1,6 @@
 const canvas = document.querySelector('#game');
 const ctx = canvas.getContext('2d');
+const scoreHTML = document.querySelector("#score")
 
  class SnakePart{
      constructor (x ,y){
@@ -14,10 +15,11 @@ const ctx = canvas.getContext('2d');
                 °Serpente che quando collide su stesso crepa 💀
                 °Serpente non deve muover sopra se stesso 🔴
                 °Serpente che esce fuori dal gioco crepa 💀  ✅
+                °Score fuori da canva 👾
 
 */
 
-
+var colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
 let speed = 6;
 
@@ -34,6 +36,9 @@ let tailLength = 2;
 let fruitX = 5;
 let fruitY = 5;
 
+//special fruit
+let fruitSPX = 7;
+let fruitSPY = 7;
 
 let xVelocity = 0;
 let yVelocity = 0;
@@ -90,9 +95,7 @@ let clearScreen = () => {
 }
 
 let drawScore = () => {
-    ctx.fillStyle = "white";
-    ctx.font = "15px Verdana"
-    ctx.fillText("Score " + score, canvas.width-70, 15)
+    scoreHTML.innerHTML= score + "<span> Points </span>";  
 }
 
 
@@ -122,6 +125,14 @@ let drawFruit = () => {
     ctx.fillStyle = 'red'
     ctx.fillRect(fruitX * tileCount, fruitY * tileCount, tileSize, tileSize)
 }
+
+//FRUTTO SPECIAL CHE DA 5 PUNTI!
+// let drawFruitSP = () => {
+//     ctx.fillRect = 'white'
+//     ctx.fillRect(fruitSPX * tileCount, fruitSPY * tileCount, tileSize, tileSize)
+// }
+
+
 
  let checkFruitCollision = () => {
      if(fruitX == headX && fruitY == headY){
