@@ -8,6 +8,17 @@ const ctx = canvas.getContext('2d');
      }
  }
 
+/* 
+ Obiettivo 🎯:
+                °Creare la schermata di gameover 🔴
+                °Serpente che quando collide su stesso crepa 💀
+                °Serpente non deve muover sopra se stesso 🔴
+                °Serpente che esce fuori dal gioco crepa 💀  ✅
+
+*/
+
+
+
 let speed = 6;
 
 let tileCount = 20;
@@ -48,10 +59,28 @@ let drawGame = () => {
 let isGameover = () => {
     let gameOver = false;
 
+    if( yVelocity === 0 && xVelocity === 0){
+        return false;
+    }
+
     //walls
-    if(headX < 0){
+    if(headX < 0 || headY < 0){
         gameOver = true;
     }
+    //tail
+    else if(headX === tileCount){
+        gameOver = true;
+    }
+    //collision with himself
+    for(let i = 0; i < snakeParts.length; i++){
+        let part = snakeParts[i];
+        if(part.x === headX && part.y === headY){
+            gameOver = true;
+            break;
+        }
+    }
+
+
     return gameOver;
 }
 
@@ -66,8 +95,7 @@ let drawScore = () => {
     ctx.fillText("Score " + score, canvas.width-70, 15)
 }
 
- 
-//il serpente riesce a camminare su stesso 🔴BUG
+
 let drawSnake = () => {
     ctx.fillStyle = 'orange'
     ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize)
@@ -105,6 +133,7 @@ let drawFruit = () => {
  }
 
 
+
 // keys trigger
  let keyDown = (event) =>{
 
@@ -121,6 +150,7 @@ let drawFruit = () => {
         xVelocity = 0;
         return
     }
+
     //Arrow Left 
     if(event.keyCode == 37){  
         yVelocity = 0;
