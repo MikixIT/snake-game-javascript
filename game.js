@@ -19,7 +19,7 @@ const scoreHTML = document.querySelector("#score")
 
 */
 
-var colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
 let speed = 6;
 
@@ -69,7 +69,7 @@ let isGameover = () => {
     }
 
     //walls
-    if(headX < 0 || headY < 0){
+    if(headX < 0 || headY < 0 || headX > 19 || headY > 19){
         gameOver = true;
     }
     //tail
@@ -90,7 +90,7 @@ let isGameover = () => {
 }
 
 let clearScreen = () => {
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = "black"
     ctx.fillRect(0,0, canvas.clientWidth, canvas.clientHeight);
 }
 
