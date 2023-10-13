@@ -15,7 +15,7 @@ const scoreHTML = document.querySelector("#score")
                 °Serpente che quando collide su stesso crepa 💀
                 °Serpente non deve muover sopra se stesso 🔴
                 °Serpente che esce fuori dal gioco crepa 💀  ✅
-                °Score fuori da canva 👾
+                °Score fuori da canva 👾 ✅
 
 */
 
@@ -81,8 +81,11 @@ let isGameover = () => {
         let part = snakeParts[i];
         if(part.x === headX && part.y === headY){
             gameOver = true;
-            break;
         }
+    }
+
+    if (gameOver == true) {
+        document.body.innerHTML = `<h1>game over</h1> <h1> Hai Totalizzato: </h1> <div id="score"> ${score} + <span>  Points </span></div>`;
     }
 
 
