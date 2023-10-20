@@ -11,11 +11,13 @@ const scoreHTML = document.querySelector("#score")
 
 /* 
  Obiettivo 🎯:
-                °Creare la schermata di gameover 🔴
-                °Serpente che quando collide su stesso crepa 💀
-                °Serpente non deve muover sopra se stesso 🔴
+                °Creare la schermata di gameover 🔴 ✅
                 °Serpente che esce fuori dal gioco crepa 💀  ✅
                 °Score fuori da canva 👾 ✅
+
+                °Creare Classifica 🥇
+                °Tasto riprova dopo il Gameover 🔄
+                °Serpente che quando collide su stesso crepa e non dovrebbe 💀
 
 */
 
@@ -149,37 +151,35 @@ let drawFruit = () => {
 
 
 // keys trigger
- let keyDown = (event) =>{
-
-    //Arrow Up 
-    if(event.keyCode == 38){  
-        yVelocity = -1;
-        xVelocity = 0;
-        return
-    }
-         
-    //Arrow Down 
-    if(event.keyCode == 40){  
-        yVelocity = 1;
-        xVelocity = 0;
-        return
-    }
-
-    //Arrow Left 
-    if(event.keyCode == 37){  
-        yVelocity = 0;
-        xVelocity = -1;
-        return
-    }
-
-    //Arrow Right
-    if(event.keyCode == 39){  
-        yVelocity = 0;
-        xVelocity = +1;
-        return
-    }
-}
-
+ let keyDown = (event) => {
+     //Arrow Up 
+     if (event.keyCode == 38 && yVelocity != 1) {  
+         yVelocity = -1;
+         xVelocity = 0;
+         return
+     }
+          
+     //Arrow Down 
+     if (event.keyCode == 40 && yVelocity != -1) {  
+         yVelocity = 1;
+         xVelocity = 0;
+         return
+     }
+ 
+     //Arrow Left 
+     if (event.keyCode == 37 && xVelocity != 1) {  
+         yVelocity = 0;
+         xVelocity = -1;
+         return
+     }
+ 
+     //Arrow Right
+     if (event.keyCode == 39 && xVelocity != -1) {  
+         yVelocity = 0;
+         xVelocity = 1;
+         return
+     }
+ }
 
 
 document.body.addEventListener("keydown", keyDown);
