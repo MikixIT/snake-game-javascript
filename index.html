@@ -46,17 +46,26 @@
         }
         body{
             font-family: 'Pixelify Sans', cursive;
+            height: 100%;
+            width: 100%;
             margin: 0px;
             padding: 0px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.754);
+            background: rgb(0,0,0);
+            background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(98,98,98,1) 50%, rgba(0,0,0,1) 100%);
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
         }
         h1{
             color: rgba(255, 255, 255, 0.331);
-            animation: rainbow 6.5s linear;
+            animation: rainbow 30.5s linear;
 		    animation-iteration-count: infinite;
         }
         canvas{
@@ -64,7 +73,7 @@
             box-shadow: 20px 10px 50px black;
         }
         #score{
-            animation: rainbow 6.5s linear;
+            animation: rainbow 30.5s linear;
 		    animation-iteration-count: infinite;
             font-size: 50px;
             margin-top: 5px;

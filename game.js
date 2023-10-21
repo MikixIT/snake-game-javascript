@@ -14,10 +14,14 @@ const scoreHTML = document.querySelector("#score")
                 °Creare la schermata di gameover 🔴 ✅
                 °Serpente che esce fuori dal gioco crepa 💀  ✅
                 °Score fuori da canva 👾 ✅
+                °Serpente che quando collide su stesso crepa e non dovrebbe 💀 ✅
 
                 °Creare Classifica 🥇
                 °Tasto riprova dopo il Gameover 🔄
-                °Serpente che quando collide su stesso crepa e non dovrebbe 💀
+
+                Opzionali: 
+                °Mobile version 📱
+
 
 */
 
@@ -58,9 +62,14 @@ let drawGame = () => {
      drawSnake();
      drawFruit();
      drawScore();
+     console.log(speed)
 
      checkFruitCollision();
      setTimeout(drawGame, 1000/ speed);
+
+     if (score % 5 === 0 && score !== 0) {
+        speed += 3; // Aumenta la velocità
+    }
 }
 
 let isGameover = () => {
@@ -118,6 +127,7 @@ let drawSnake = () => {
     while(snakeParts.length > tailLength){
         snakeParts.shift(); 
     }
+
 
 }
 
