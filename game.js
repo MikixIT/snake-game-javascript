@@ -161,38 +161,37 @@ let drawFruit = () => {
 
 
 // keys trigger
- let keyDown = (event) => {
-     //Arrow Up 
-     if (event.keyCode == 38 && yVelocity != 1) {  
-         yVelocity = -1;
-         xVelocity = 0;
-         return
-     }
-          
-     //Arrow Down 
-     if (event.keyCode == 40 && yVelocity != -1) {  
-         yVelocity = 1;
-         xVelocity = 0;
-         return
-     }
- 
-     //Arrow Left 
-     if (event.keyCode == 37 && xVelocity != 1) {  
-         yVelocity = 0;
-         xVelocity = -1;
-         return
-     }
- 
-     //Arrow Right
-     if (event.keyCode == 39 && xVelocity != -1) {  
-         yVelocity = 0;
-         xVelocity = 1;
-         return
-     }
- }
+let keyState = {};
 
+let keyDown = (event) => {
+    keyState[event.keyCode] = true;
+
+    if (keyState[38] && yVelocity !== 1) { // Arrow Up
+        yVelocity = -1;
+        xVelocity = 0;
+    } else if (keyState[40] && yVelocity !== -1) { // Arrow Down
+        yVelocity = 1;
+        xVelocity = 0;
+    } else if (keyState[37] && xVelocity !== 1) { // Arrow Left
+        yVelocity = 0;
+        xVelocity = -1;
+    } else if (keyState[39] && xVelocity !== -1) { // Arrow Right
+        yVelocity = 0;
+        xVelocity = 1;
+    }
+};
+
+let keyUp = (event) => {
+    keyState[event.keyCode] = false;
+};
 
 document.body.addEventListener("keydown", keyDown);
+document.body.addEventListener("keyup", keyUp);
+
+// Aggiungi il seguente codice per evitare che gli input dei tasti vengano trattati come eventi di default del browser
+document.body.addEventListener("keydown", function(event) {
+    event.preventDefault();
+});
 
 
 drawGame() 
