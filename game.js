@@ -27,7 +27,7 @@ const scoreHTML = document.querySelector("#score")
 
 const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
-let speed = 6;
+let speed = 9;
 
 let tileCount = 20;
 let tileSize = canvas.width / tileCount -2;
@@ -79,23 +79,21 @@ let isGameover = () => {
         return false;
     }
 
-    //walls
-    if(headX < 0 || headY < 0 || headX > 19 || headY > 19){
+    // walls
+    if (headX < 0 || headY < 0 || headX >= tileCount || headY >= tileCount) {
         gameOver = true;
     }
-    //tail
-    else if(headX === tileCount){
-        gameOver = true;
-    }
+
     //collision with himself
     for(let i = 0; i < snakeParts.length; i++){
         let part = snakeParts[i];
-        if(part.x === headX && part.y === headY){
+        if (part.x === headX && part.y === headY){
             gameOver = true;
+            break;
         }
     }
 
-    if (gameOver == true) {
+    if (gameOver) {
         document.body.innerHTML = `<h1>game over</h1> <h1> Hai Totalizzato: </h1> <div id="score"> ${score} + <span>  Points </span></div>`;
     }
 
@@ -132,9 +130,23 @@ let drawSnake = () => {
 }
 
 let changeSnakePosition = () => {
-    headX = headX + xVelocity;
-    headY = headY + yVelocity;
-}
+    if (keyState[38] && yVelocity !== 1) { // Arrow Up
+        yVelocity = -1;
+        xVelocity = 0;
+    } else if (keyState[40] && yVelocity !== -1) { // Arrow Down
+        yVelocity = 1;
+        xVelocity = 0;
+    } else if (keyState[37] && xVelocity !== 1) { // Arrow Left
+        yVelocity = 0;
+        xVelocity = -1;
+    } else if (keyState[39] && xVelocity !== -1) { // Arrow Right
+        yVelocity = 0;
+        xVelocity = 1;
+    }
+
+    headX += xVelocity;
+    headY += yVelocity;
+};
 
 let drawFruit = () => {
     ctx.fillStyle = 'red'
@@ -159,26 +171,12 @@ let drawFruit = () => {
  }
 
 
-
 // keys trigger
-let keyState = {};
+
+const keyState = {}; 
 
 let keyDown = (event) => {
     keyState[event.keyCode] = true;
-
-    if (keyState[38] && yVelocity !== 1) { // Arrow Up
-        yVelocity = -1;
-        xVelocity = 0;
-    } else if (keyState[40] && yVelocity !== -1) { // Arrow Down
-        yVelocity = 1;
-        xVelocity = 0;
-    } else if (keyState[37] && xVelocity !== 1) { // Arrow Left
-        yVelocity = 0;
-        xVelocity = -1;
-    } else if (keyState[39] && xVelocity !== -1) { // Arrow Right
-        yVelocity = 0;
-        xVelocity = 1;
-    }
 };
 
 let keyUp = (event) => {
@@ -187,12 +185,6 @@ let keyUp = (event) => {
 
 document.body.addEventListener("keydown", keyDown);
 document.body.addEventListener("keyup", keyUp);
-
-// Aggiungi il seguente codice per evitare che gli input dei tasti vengano trattati come eventi di default del browser
-document.body.addEventListener("keydown", function(event) {
-    event.preventDefault();
-});
-
 
 drawGame() 
 
