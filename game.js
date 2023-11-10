@@ -28,6 +28,7 @@ const scoreHTML = document.querySelector("#score")
 const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
 let speed = 9;
+let gameTimeout = null;
 
 let tileCount = 20;
 let tileSize = canvas.width / tileCount -2;
@@ -63,12 +64,14 @@ let drawGame = () => {
      drawFruit();
      drawScore();
      console.log(speed)
-
+     
      checkFruitCollision();
-     setTimeout(drawGame, 1000/ speed);
 
-     if (score % 5 === 0 && score !== 0) {
-        speed += 3; // Aumenta la velocità
+    if (gameTimeout === null) {
+        gameTimeout = setTimeout(() => {
+          gameTimeout = null;
+          drawGame();
+        }, 1000 / speed);
     }
 }
 
