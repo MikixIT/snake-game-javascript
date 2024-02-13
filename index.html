@@ -8,6 +8,24 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@600;700&display=swap");
 
+      @media (max-width: 767px) {
+        .touch-controls {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .touch-controls button {
+          display: block;
+          margin: 5px;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .touch-controls {
+          display: none; /* Nasconde i pulsanti nella versione desktop */
+        }
+      }
+
       @keyframes gradientAnimation {
         0% {
           background-position: 0% 50%;
@@ -76,7 +94,7 @@
           rgba(0, 0, 0, 1) 100%
         );
         background-size: 200% 200%;
-        animation: gradientAnimation 100s infinite;
+        animation: gradientAnimation 90s infinite;
       }
 
       html,
@@ -104,9 +122,6 @@
         color: white;
       }
 
-      #leaderboard {
-        color: white;
-      }
       .restart-button {
         background-color: #f5f5f5;
         border: 2px solid #000000;
@@ -130,6 +145,12 @@
     <h1>Snake Game 🐍</h1>
     <canvas id="game" width="400" height="400"></canvas>
     <div id="score"></div>
+    <div class="touch-controls">
+      <button id="touch-up">↑</button>
+      <button id="touch-down">↓</button>
+      <button id="touch-left">←</button>
+      <button id="touch-right">→</button>
+    </div>
     <script src="game.js"></script>
   </body>
 </html>

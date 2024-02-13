@@ -10,48 +10,21 @@ class SnakePart {
 }
 
 /* 
- Obiettivo 🎯:
-                °Creare la schermata di gameover 🔴 ✅
-                °Serpente che esce fuori dal gioco crepa 💀  ✅
-                °Score fuori da canva 👾 ✅
-                °Serpente che quando collide su stesso crepa e non dovrebbe 💀 ✅
-
-                °Creare Classifica 🥇
-                °Tasto riprova dopo il Gameover 🔄
-
-                Opzionali: 
-                °Mobile version 📱
-
-
-*/
-
-let leaderboard = [
-  { name: "Paperino", score: 30 },
-  { name: "Vegeta", score: 27 },
-  { name: "Pasqualino", score: 15 },
-  { name: "Gianperino Prappazzoni", score: 7 },
-];
-
-const updateLeaderboard = (name, score) => {
-  leaderboard.push({ name, score });
-  leaderboard.sort((a, b) => b.score - a.score);
-  // Limita la classifica alle prime 10 posizioni
-  leaderboard.splice(10);
-};
-
-const showLeaderboard = () => {
-  const leaderboardElement = document.querySelector("#leaderboard");
-  leaderboardElement.innerHTML = "";
-
-  leaderboard.forEach((player, i) => {
-    const position = i + 1;
-    leaderboardElement.innerHTML += `<p>${position}. ${player.name} - ${player.score}</p>`;
-  });
-};
+  Obiettivo 🎯:
+                 °Creare la schermata di gameover 🔴 ✅
+                 °Serpente che esce fuori dal gioco crepa 💀  ✅
+                 °Score fuori da canva 👾 ✅
+                 °Serpente che quando collide su stesso crepa e non dovrebbe 💀 ✅
+                 °Tasto riprova dopo il Gameover 🔄  ✅
+ 
+                 Opzionali: 
+                 °Mobile version 📱
+ 
+ 
+ */
 
 const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
-
-let speed = 9;
+let speed = 6;
 let gameTimeout = null;
 
 let tileCount = 20;
@@ -87,7 +60,6 @@ let drawGame = () => {
   drawSnake();
   drawFruit();
   drawScore();
-  updateLeaderboard();
 
   checkFruitCollision();
 
@@ -122,11 +94,11 @@ let isGameover = () => {
 
   if (gameOver) {
     document.body.innerHTML = `
-      <h1>Game over 💀</h1>
-      <h1 id="score">Hai totalizzato: ${score} Points</h1>
-      <p id="score">🐍</p>
-      <button class="restart-button">Riprova</button>
-    `;
+       <h1>Game over 💀</h1>
+       <h1 id="score">Hai totalizzato: ${score} Points</h1>
+       <p id="score">🐍</p>
+       <button class="restart-button">Riprova</button>
+     `;
     const restartButton = document.querySelector(".restart-button");
     restartButton.addEventListener("click", () => {
       document
@@ -209,7 +181,6 @@ let checkFruitCollision = () => {
 };
 
 // keys trigger
-
 const keyState = {};
 
 let keyDown = (event) => {
@@ -223,8 +194,29 @@ let keyUp = (event) => {
 document.body.addEventListener("keydown", keyDown);
 document.body.addEventListener("keyup", keyUp);
 
+document.getElementById("touch-up").addEventListener("touchstart", function () {
+  yVelocity = -1;
+  xVelocity = 0;
+});
+
+document
+  .getElementById("touch-down")
+  .addEventListener("touchstart", function () {
+    yVelocity = 1;
+    xVelocity = 0;
+  });
+
+document
+  .getElementById("touch-left")
+  .addEventListener("touchstart", function () {
+    yVelocity = 0;
+    xVelocity = -1;
+  });
+
+document
+  .getElementById("touch-right")
+  .addEventListener("touchstart", function () {
+    yVelocity = 0;
+    xVelocity = 1;
+  });
 drawGame();
-
-//request Animation Frame
-
-//setInterval xtimes for a second
