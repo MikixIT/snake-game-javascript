@@ -139,6 +139,20 @@
         background-color: #000000;
         color: #f5f5f5;
       }
+
+      footer {
+        margin: 30px;
+        font-size: 13px;
+      }
+
+      footer a {
+        font-size: 16px;
+        padding: 10px;
+        color: rgba(255, 255, 255, 0.331);
+        animation: rainbow 51.5s linear;
+        animation-iteration-count: infinite;
+        text-decoration: none;
+      }
     </style>
     <title>Snake Game 🐍</title>
   </head>
@@ -146,6 +160,9 @@
     <h1>Snake Game 🐍</h1>
     <canvas id="game" width="400" height="400"></canvas>
     <div id="score"></div>
+    <footer>
+      Made with 🐍 by<a href="https://github.com/MikixIT/">Michael Torres</a>
+    </footer>
     <div class="touch-controls">
       <button id="touch-up">↑</button>
       <button id="touch-down">↓</button>
