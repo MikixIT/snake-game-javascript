@@ -24,7 +24,7 @@ class SnakePart {
  */
 
 const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
-let speed = 6;
+let speed = 7;
 let gameTimeout = null;
 
 let tileCount = 20;
@@ -95,9 +95,9 @@ let isGameover = () => {
   if (gameOver) {
     document.body.innerHTML = `
        <h1>Game over 💀</h1>
-       <h1 id="score">Hai totalizzato: ${score} Points</h1>
+       <h1 id="score">Your score: ${score} Points</h1>
        <p id="score">🐍</p>
-       <button class="restart-button">Riprova</button>
+       <button class="restart-button">RETRY</button>
      `;
     const restartButton = document.querySelector(".restart-button");
     restartButton.addEventListener("click", () => {
